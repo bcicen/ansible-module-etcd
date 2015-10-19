@@ -134,7 +134,7 @@ def main():
         prev_value = client.get(key).value
     except requests.ConnectionError:
         module.fail_json(msg="Can not connect to target.")
-    except KeyError:
+    except etcd.EtcdKeyNotFound:
         prev_value = None
     except etcd.EtcdException as err:
         module.fail_json(msg="Etcd error: %s" % err)
